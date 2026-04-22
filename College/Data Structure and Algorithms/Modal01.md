@@ -61,7 +61,30 @@ Insertion and deletion operations maintain the BST property, making searching fa
 
 <br><br>
 
-## 2. What is queue. Explain about enqueue and dequeue operation in circular queue
+## 2. What is AVL tree? Construct AVL tree for the following data 21,26,30,9,4,14,28,18,15
+An AVL Tree is a self-balancing Binary Search Tree (BST) introduced by Adelson-Velsky and Landis.
+
+**It keeps the tree balanced by ensuring:**
+* Balance Factor = Height(left) − Height(right)
+* Value must be -1, 0, or +1
+
+If imbalance happens, rotations are used to fix it. Think of it as a tree with control issues.
+
+# Construction of AVL 
+```
+Given Data:  21, 26, 30, 9, 4, 14, 28, 18, 15
+
+        21
+       /  \
+      9    28
+     / \   / \
+    4  15 26 30
+       / \
+      14 18
+```
+<br><br>
+
+## 3. What is queue. Explain about enqueue and dequeue operation in circular queue
 
 A **Queue** is a linear data structure that follows **FIFO (First In First Out)**.
 
@@ -114,7 +137,7 @@ A **Circular Queue** avoids space wastage by reusing empty positions and perform
 
 <br><br>
 
-## 3. What do you mean by MST? explain kruskai algorithm with example.
+## 4. What do you mean by MST? explain kruskai algorithm with example.
 
 A **Minimum Spanning Tree (MST)** is a subset of edges of a connected weighted graph that:
 
@@ -158,7 +181,7 @@ Kruskal’s Algorithm constructs a **Minimum Spanning Tree** by selecting the sm
 
 <br><br>
 
-## 4. Assume you have to store the data {0,1,2,3,4,5,7} into a hash table of size 5, with hash function h(x) = x%5. apply linear probing and quadratic probing as collision resolution techniques.
+## 5. Assume you have to store the data {0,1,2,3,4,5,7} into a hash table of size 5, with hash function h(x) = x%5. apply linear probing and quadratic probing as collision resolution techniques.
 ```
 Given:
     * Data: {0,1,2,3,4,5,7}
