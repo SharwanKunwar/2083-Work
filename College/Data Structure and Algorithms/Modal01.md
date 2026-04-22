@@ -1,5 +1,5 @@
-
 ## 1. What is binary search tree ? Write algorithm to implement insertion and deletion in binary search tree ?
+
 A **Binary Search Tree (BST)** is a binary tree in which each node satisfies the following properties:
 
 - All elements in the left subtree are less than the root node.
@@ -13,12 +13,14 @@ This property makes searching, insertion, and deletion efficient.
 ## 🌳 Example
 
 ```
-            50
-          /    \
-        30      70
-       /  \    /   \
-      20  40   60  80
-```
+
+           50
+         /    \
+       30      70
+      /  \    /  \
+     20  40  60  80
+   ```
+
 
 ---
 
@@ -56,10 +58,10 @@ Deletion in BST involves three cases:
 A **Binary Search Tree (BST)** is an efficient data structure for storing sorted data.  
 Insertion and deletion operations maintain the BST property, making searching faster compared to unsorted structures.
 
+
 <br><br>
 
 ## 2. What is queue. Explain about enqueue and dequeue operation in circular queue
-
 
 A **Queue** is a linear data structure that follows **FIFO (First In First Out)**.
 
@@ -109,6 +111,7 @@ A **Circular Queue** connects the last position to the first, allowing unused sp
 
 A **Circular Queue** avoids space wastage by reusing empty positions and performs insertion and deletion efficiently.
 
+
 <br><br>
 
 ## 3. What do you mean by MST? explain kruskai algorithm with example.
@@ -156,15 +159,16 @@ Kruskal’s Algorithm constructs a **Minimum Spanning Tree** by selecting the sm
 <br><br>
 
 ## 4. Assume you have to store the data {0,1,2,3,4,5,7} into a hash table of size 5, with hash function h(x) = x%5. apply linear probing and quadratic probing as collision resolution techniques.
-
+```
 Given:
-* Data: {0,1,2,3,4,5,7}
-* Hash function: h(x) = x % 5
-* Table size = 5
-
+    * Data: {0,1,2,3,4,5,7}
+    * Hash function: h(x) = x % 5
+    * Table size = 5
+```
 ---
 
-## Hash Values: 0→0, 1→1, 2→2, 3→3, 4→4, 5→0, 7→2
+## Hash Values:
+0→0, 1→1, 2→2, 3→3, 4→4, 5→0, 7→2
 
 ---
 
