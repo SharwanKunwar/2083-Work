@@ -238,3 +238,98 @@ Let `STACK[MAX]` be an array and `TOP` be the pointer.
 8. After scanning complete expression,
       Pop all remaining operators from stack into `POST`
 9. Return `POST`
+
+<br><br>
+
+<hr>
+<hr>
+<br>
+
+## 8. Explain circular linked list with example. How do you implement linked list operation in singly linked list ? Explain
+
+A Circular Linked List is a type of linked list in which the last node points back to the first node, forming a circle.
+There is no NULL pointer at the end.
+
+### ✏️ Example
+
+```
+10 → 20 → 30 → 40
+↑               ↓
+←←←←←←←←←←←←←←←
+```
+* Last node (40) points back to first node (10)
+
+<br><br>
+
+### Implementation of Linked List Operations (Singly Linked List)
+Each node contains data and a pointer to the next node.
+
+```c
+struct Node {
+    int data;
+    struct Node* next;
+};
+```
+
+## 1️⃣ Insertion Operation
+
+### 🔹 Insertion At Beginning
+* Make new node point to head
+* Update head
+
+```
+new->next = head;
+head = new;
+```
+
+### 🔹 Insertion At End
+* Traverse to last node
+* Attach new node
+
+```c
+temp = head;
+while(temp->next != NULL)
+    temp = temp->next;
+
+temp->next = new;
+```
+
+## 2️⃣ Deletion Operation
+
+### 🔹 From Beginning
+* Move head to next node
+
+```c
+temp = head;
+head = head->next;
+free(temp);
+```
+
+### 🔹 From End
+* Traverse to second last node
+* Delete last node
+
+```
+temp = head;
+while(temp->next->next != NULL)
+    temp = temp->next;
+
+free(temp->next);
+temp->next = NULL;
+```
+
+## 3️⃣ Traversal Operation
+* Visit each node and print data
+
+```
+temp = head;
+while(temp != NULL) {
+    printf("%d", temp->data);
+    temp = temp->next;
+}
+
+```
+
+### ✅ Conclusion
+
+Singly linked list operations are implemented by updating pointers (links) between nodes for insertion, deletion, and traver
