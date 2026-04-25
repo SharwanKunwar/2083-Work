@@ -181,7 +181,43 @@ Kruskal’s Algorithm constructs a **Minimum Spanning Tree** by selecting the sm
 
 <br><br>
 
-## 5. Assume you have to store the data {0,1,2,3,4,5,7} into a hash table of size 5, with hash function h(x) = x%5. apply linear probing and quadratic probing as collision resolution techniques.
+## 5. State problem Tower of Hanoi. Explain the algorithm to solve the problem and trace for 4 disks.
+
+The Tower of Hanoi consists of three rods (A, B, C) and n disks of different sizes placed on rod A (largest at bottom).
+The goal is to move all disks from A to C using rod B.
+
+**Rules:**
+
+1. Only one disk can be moved at a time
+2. Only the top disk can be moved
+3. A larger disk cannot be placed on a smaller disk
+
+### 🧠 Algorithm (Recursive)
+
+```
+TOH(n, A, B, C):
+  if n == 1:
+     move A → C
+  else:
+     TOH(n-1, A, C, B)
+     move A → C
+     TOH(n-1, B, A, C)
+```
+
+### 🔁 Trace for 4 Disks (15 Moves)
+```
+
+Moves:
+A→B, A→C, B→C, A→B, C→A, C→B, A→B,
+A→C, B→C, B→A, C→A, B→C, A→B, A→C, B→C
+```
+**✅ Result**
+* Total moves = 2ⁿ − 1 = 15
+* All disks moved from A to C
+
+<br><br>
+
+## 6. Assume you have to store the data {0,1,2,3,4,5,7} into a hash table of size 5, with hash function h(x) = x%5. apply linear probing and quadratic probing as collision resolution techniques.
 ```
 Given:
     * Data: {0,1,2,3,4,5,7}
