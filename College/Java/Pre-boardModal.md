@@ -1006,3 +1006,191 @@ Step 6: Close Resources  → rs.close(), stmt.close(), con.close()
 <br><br><br>
 
 
+## Q: What is JInternalFrame? Write a Java program using Swing component to find largest and smallest number among three numbers. Use text fields for input and output. Your program should display the result when user presses a button.
+
+
+**Definition:** JInternalFrame is a Swing component that provides a lightweight object that looks and behaves like a native frame inside a JDesktopPane. It is used to create Multiple Document Interface (MDI) applications where multiple windows exist inside a single parent window.
+
+### Key Points:
+- It lives inside a **JDesktopPane** (parent container)
+- Can be **minimized, maximized, closed and resized** like a regular frame
+- Used to create **MDI (Multiple Document Interface)** applications
+- It is part of **javax.swing** package
+
+### Syntax:
+
+```java
+JInternalFrame inf = new JInternalFrame(
+    "Title",   // title
+    true,      // resizable
+    true,      // closable
+    true,      // maximizable
+    true       // iconifiable
+);
+```
+
+### Example:
+
+```java
+import javax.swing.*;
+
+public class InternalFrameDemo extends JFrame {
+    public InternalFrameDemo() {
+        setTitle("MDI Application");
+        setSize(500, 400);
+
+        // Create Desktop Pane
+        JDesktopPane desktop = new JDesktopPane();
+
+        // Create Internal Frame
+        JInternalFrame inf = new JInternalFrame(
+            "Internal Frame", true, true, true, true);
+        inf.setSize(300, 200);
+        inf.setVisible(true);
+
+        // Add internal frame to desktop
+        desktop.add(inf);
+        add(desktop);
+
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args) {
+        new InternalFrameDemo();
+    }
+}
+```
+
+---
+
+## Java Swing Program: Find Largest and Smallest Among Three Numbers
+
+```java
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class LargestSmallest extends JFrame implements ActionListener {
+
+    // Declare components
+    JLabel l1, l2, l3, l4, l5;
+    JTextField tf1, tf2, tf3, tfLargest, tfSmallest;
+    JButton btnFind, btnClear;
+
+    public LargestSmallest() {
+
+        setTitle("Find Largest and Smallest Number");
+        setSize(400, 350);
+        setLayout(null); // absolute layout
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        // Labels
+        l1 = new JLabel("Enter First Number:");
+        l1.setBounds(30, 30, 150, 25);
+        add(l1);
+
+        l2 = new JLabel("Enter Second Number:");
+        l2.setBounds(30, 70, 150, 25);
+        add(l2);
+
+        l3 = new JLabel("Enter Third Number:");
+        l3.setBounds(30, 110, 150, 25);
+        add(l3);
+
+        l4 = new JLabel("Largest Number:");
+        l4.setBounds(30, 190, 150, 25);
+        add(l4);
+
+        l5 = new JLabel("Smallest Number:");
+        l5.setBounds(30, 230, 150, 25);
+        add(l5);
+
+        // Text Fields for Input
+        tf1 = new JTextField();
+        tf1.setBounds(200, 30, 150, 25);
+        add(tf1);
+
+        tf2 = new JTextField();
+        tf2.setBounds(200, 70, 150, 25);
+        add(tf2);
+
+        tf3 = new JTextField();
+        tf3.setBounds(200, 110, 150, 25);
+        add(tf3);
+
+        // Text Fields for Output
+        tfLargest = new JTextField();
+        tfLargest.setBounds(200, 190, 150, 25);
+        tfLargest.setEditable(false); // read only
+        tfLargest.setBackground(Color.LIGHT_GRAY);
+        add(tfLargest);
+
+        tfSmallest = new JTextField();
+        tfSmallest.setBounds(200, 230, 150, 25);
+        tfSmallest.setEditable(false); // read only
+        tfSmallest.setBackground(Color.LIGHT_GRAY);
+        add(tfSmallest);
+
+        // Find Button
+        btnFind = new JButton("Find");
+        btnFind.setBounds(60, 280, 100, 30);
+        btnFind.addActionListener(this);
+        add(btnFind);
+
+        // Clear Button
+        btnClear = new JButton("Clear");
+        btnClear.setBounds(220, 280, 100, 30);
+        btnClear.addActionListener(this);
+        add(btnClear);
+
+        setVisible(true);
+    }
+
+    // Action performed when button is clicked
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == btnFind) {
+            try {
+                // Read input from text fields
+                double a = Double.parseDouble(tf1.getText());
+                double b = Double.parseDouble(tf2.getText());
+                double c = Double.parseDouble(tf3.getText());
+
+                // Find largest using conditional operator
+                double largest  = (a > b) ? ((a > c) ? a : c)
+                                          : ((b > c) ? b : c);
+
+                // Find smallest using conditional operator
+                double smallest = (a < b) ? ((a < c) ? a : c)
+                                          : ((b < c) ? b : c);
+
+                // Display result in output text fields
+                tfLargest.setText(String.valueOf(largest));
+                tfSmallest.setText(String.valueOf(smallest));
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this,
+                    "Please enter valid numbers!",
+                    "Input Error",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        if (e.getSource() == btnClear) {
+            // Clear all text fields
+            tf1.setText("");
+            tf2.setText("");
+            tf3.setText("");
+            tfLargest.setText("");
+            tfSmallest.setText("");
+        }
+    }
+
+    public static void main(String[] args) {
+        new LargestSmallest();
+    }
+}
+```
+
