@@ -70,7 +70,7 @@ If b > a → compare b and c → return larger
 
 
 
-## Q: next question do same . what is inner class? write a java program using recursive method to find greatest common divisor of two numbers
+## Q: what is inner class? write a java program using recursive method to find greatest common divisor of two numbers
 
 ---
 
