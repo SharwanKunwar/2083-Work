@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Web Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        /* ── Navigation Menu ── */
+        nav {
+            background: #2c3e50;
+            padding: 12px 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            padding: 6px 14px;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            background: #1a252f;
+        }
+
+        /* ── Home Page ── */
+        #home {
+            background: #2980b9;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        #home h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        #home p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        #home button {
+            padding: 10px 24px;
+            background: white;
+            color: #2980b9;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        #home button:hover {
+            background: #ecf0f1;
+        }
+
+        /* ── Section wrapper ── */
+        section {
+            padding: 40px 30px;
+        }
+
+        section h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-left: 4px solid #2980b9;
+            padding-left: 10px;
+        }
+
+        /* ── Image Gallery ── */
+        #gallery {
+            background: #fff;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .gallery-grid div {
+            background: #dfe6e9;
+            border-radius: 6px;
+            height: 130px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .gallery-grid span {
+            font-size: 13px;
+            margin-top: 6px;
+            color: #555;
+        }
+
+        /* ── Menu ── */
+        #menu {
+            background: #f0f4f8;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .menu-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 16px;
+        }
+
+        .menu-card h3 {
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .menu-card p {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .menu-card .price {
+            font-weight: bold;
+            color: #2980b9;
+        }
+
+        /* ── Data Entry Form ── */
+        #form-section {
+            background: #fff;
+        }
+
+        form {
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        form label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+            background: #fafafa;
+        }
+
+        form textarea {
+            height: 90px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-submit {
+            padding: 9px 22px;
+            background: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background: #1f6f9c;
+        }
+
+        .btn-clear {
+            padding: 9px 22px;
+            background: #ecf0f1;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* ── Conclusion ── */
+        #conclusion {
+            background: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        #conclusion h2 {
+            color: #ecf0f1;
+            border-left-color: #2980b9;
+        }
+
+        #conclusion p {
+            font-size: 15px;
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        #conclusion ul {
+            padding-left: 20px;
+            line-height: 2;
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#menu">Menu</a>
+        <a href="#form-section">Form</a>
+        <a href="#conclusion">Conclusion</a>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home">
+        <h1>Welcome to My Website</h1>
+        <p>A simple CSS web page with gallery, menu, and form.</p>
+        <button onclick="document.getElementById('gallery').scrollIntoView()">Get Started</button>
+    </div>
+
+    <!-- Image Gallery -->
+    <section id="gallery">
+        <h2>Image Gallery</h2>
+        <div class="gallery-grid">
+            <div>🏔️ <span>Mountains</span></div>
+            <div>🌊 <span>Ocean</span></div>
+            <div>🌲 <span>Forest</span></div>
+            <div>🌸 <span>Flowers</span></div>
+            <div>🌅 <span>Sunset</span></div>
+            <div>🏙️ <span>City</span></div>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu">
+        <h2>Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <h3>Garden Salad</h3>
+                <p>Fresh greens with olive oil dressing.</p>
+                <span class="price">$8.00</span>
+            </div>
+            <div class="menu-card">
+                <h3>Grilled Salmon</h3>
+                <p>Served with veggies and lemon.</p>
+                <span class="price">$22.00</span>
+            </div>
+            <div class="menu-card">
+                <h3>Chocolate Cake</h3>
+                <p>Rich dark chocolate with cream.</p>
+                <span class="price">$9.00</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Entry Form -->
+    <section id="form-section">
+        <h2>Data Entry Form</h2>
+        <form onsubmit="return false">
+            <div class="form-row">
+                <div>
+                    <label>First Name</label>
+                    <input type="text" placeholder="John">
+                </div>
+                <div>
+                    <label>Last Name</label>
+                    <input type="text" placeholder="Doe">
+                </div>
+            </div>
+            <div>
+                <label>Email</label>
+                <input type="email" placeholder="john@example.com">
+            </div>
+            <div>
+                <label>Country</label>
+                <select>
+                    <option>Nepal</option>
+                    <option>India</option>
+                    <option>USA</option>
+                    <option>UK</option>
+                </select>
+            </div>
+            <div>
+                <label>Message</label>
+                <textarea placeholder="Write your message..."></textarea>
+            </div>
+            <div class="btn-row">
+                <button class="btn-submit" type="submit">Submit</button>
+                <button class="btn-clear" type="reset">Clear</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Conclusion -->
+    <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>This page covers the key CSS concepts used in everyday web development.</p>
+        <ul>
+            <li>CSS Grid for gallery and menu layouts</li>
+            <li>Flexbox for navigation and button rows</li>
+            <li>CSS selectors, colors, and hover effects</li>
+            <li>Responsive two-column form layout</li>
+            <li>Smooth anchor link navigation</li>
+        </ul>
+    </section>
+
+</body>
+
+</html>
