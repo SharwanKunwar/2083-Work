@@ -821,7 +821,210 @@ Charlie has 2 rooms
 // h4.showInfo() never executes
 ```
 
+
+### ❓ Question 14 — 🔥 The Chain Reaction!
+
+**Question asked:**
+> 1. What is the output?
+> 2. How many actual objects in memory?
+> 3. How many unique objects does `s5` share with `s1`?
+> 4. Draw the memory picture — who points to what?
+> (Hint: There's a chain — `s3 = s1` and `s5 = s3`. Think carefully what that means!)
+
+```java
+class Student {
+    String name;
+    int marks;
+
+    void promote() {
+        marks = marks + 10;
+    }
+
+    void showResult() {
+        System.out.println(name + " : " + marks);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        Student s2 = new Student();
+        Student s3 = s1;
+        Student s4 = s2;
+        Student s5 = s3;
+
+        s1.name = "Alice";
+        s1.marks = 50;
+
+        s2.name = "Bob";
+        s2.marks = 60;
+
+        s5.promote();
+        s5.promote();
+        s4.promote();
+        s3.name = "Charlie";
+
+        s1.showResult();
+        s2.showResult();
+        s3.showResult();
+        s4.showResult();
+        s5.showResult();
+    }
+}
+```
+
+**My Answer:**
+```
+Charlie : 70
+Bob : 80        ← ❌ (should be 70)
+Charlie : 70
+Bob : 80        ← ❌ (should be 70)
+Charlie : 70
+```
+> There are 2 actual objects — the others are reference type variables.
+> s5 shares only one object — s1, s3, and s5 are all pointing to s1's object in the heap.
+> s1, s3, and s5 are pointing to the same memory address and s2 and s4 are pointing to the same memory address.
+
+**Verdict: ⚠️ Concepts Perfect — s2/s4 output wrong**
+
+**Correct Output:**
+```
+Charlie : 70   ← s1
+Bob : 70       ← s2 (not 80!)
+Charlie : 70   ← s3
+Bob : 70       ← s4 (not 80!)
+Charlie : 70   ← s5
+```
+
+**Memory Picture:**
+```
+s1 ──┐
+s3 ──┼──→ Object1 [ name="Charlie", marks=70 ]
+s5 ──┘
+
+s2 ──┐
+s4 ──┴──→ Object2 [ name="Bob", marks=70 ]
+```
+
+**Marks Trace:**
+
+| Action | Effect |
+|--------|--------|
+| `s1.marks = 50` | Object1 marks → 50 |
+| `s5.promote()` | Object1 marks → 60 (s5 = s3 = s1!) |
+| `s5.promote()` | Object1 marks → 70 |
+| `s4.promote()` | Object2 marks → 70 (s4 = s2!) |
+| `s3.name = "Charlie"` | Object1 name → "Charlie" |
+
+**What I Learned:**
+> I correctly tracked `s5.promote()` twice for Object1 → 50+10+10 = 70 ✅
+> But forgot `s4.promote()` also affects Object2 → 60+10 = 70, not 80 ❌
+> The chain `s5 = s3 = s1` means all three point to the exact same object!
+
 ---
+
+### ❓ Question 15 — 💀 The Reassignment Trap!
+
+**Question asked:**
+> 1. What is the output?
+> 2. How many actual objects in memory?
+> 3. How many objects are GC eligible?
+> 4. Draw the memory picture — before AND after `e3 = e2`
+> (Hint: `e3` first points to one object, then switches to another! What happens to each object after the switch?)
+
+```java
+class Employee {
+    String name;
+    int salary;
+
+    void applyBonus() {
+        salary = salary + 5000;
+    }
+
+    void showInfo() {
+        System.out.println(name + " earns " + salary);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Employee e1 = new Employee();
+        Employee e2 = new Employee();
+        Employee e3 = e1;
+
+        e1.name = "Alice";
+        e1.salary = 30000;
+
+        e2.name = "Bob";
+        e2.salary = 40000;
+
+        e3.applyBonus();
+
+        e3 = e2;
+
+        e3.applyBonus();
+        e3.name = "Charlie";
+
+        e1.showInfo();
+        e2.showInfo();
+        e3.showInfo();
+    }
+}
+```
+
+**My Answer:**
+```
+Alice earns 8000    ← ❌ (should be 35000, calculation slip)
+Charlie earns 45000
+Charlie earns 45000
+```
+> There are 2 objects. There is nothing eligible for GC.
+>
+> Before e3 = e2: e1 and e3 are pointing to the same memory address and e2 is pointing to its own object.
+> After e3 = e2: e1 is pointing to its own object and e2 and e3 are pointing to the same memory address.
+
+**Verdict: ⚠️ Concepts & Memory Picture Perfect — e1 salary wrong (calculation slip)**
+
+**Correct Output:**
+```
+Alice earns 35000   ← e1
+Charlie earns 45000 ← e2
+Charlie earns 45000 ← e3
+```
+
+**Memory Picture:**
+```
+Before e3 = e2:
+e1 ──┐
+     ├──→ Object1 [ Alice, 35000 ]
+e3 ──┘
+e2 ───→ Object2 [ Bob, 40000 ]
+
+After e3 = e2:
+e1 ───→ Object1 [ Alice, 35000 ]
+e2 ──┐
+     ├──→ Object2 [ Charlie, 45000 ]
+e3 ──┘
+```
+
+**Salary Trace:**
+
+| Action | Effect |
+|--------|--------|
+| `e1.salary = 30000` | Object1 salary → 30000 |
+| `e2.salary = 40000` | Object2 salary → 40000 |
+| `e3.applyBonus()` | Object1 salary → 35000 (e3 = e1 at this point!) |
+| `e3 = e2` | e3 now switches to Object2 |
+| `e3.applyBonus()` | Object2 salary → 45000 |
+| `e3.name = "Charlie"` | Object2 name → "Charlie" |
+
+**What I Learned:**
+*  I correctly tracked `e3 = e2` switch and the memory picture perfectly!
+*  But made a calculation slip on e1's salary — 30000 + 5000 = 35000, i thought 3k and 5k 
+* No GC eligible because e1 still holds Object1 even after e3 switched away!
+
+---
+
 
 ## 🏆 Topic 1 Final Scorecard — Class & Object
 
