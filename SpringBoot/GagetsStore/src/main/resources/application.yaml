@@ -1,3 +1,73 @@
 spring:
+  # ---------------------------------------------------
+  # Application Configuration
+  # ---------------------------------------------------
+  # This sets the name of your Spring Boot application.
+  # It may appear in logs, monitoring tools, and dashboards.
   application:
-    name: GagetsStore
+    name: GadgetsStore
+
+  # ---------------------------------------------------
+  # Database Configuration
+  # ---------------------------------------------------
+  # Spring Boot uses these properties to connect
+  # with your PostgreSQL database.
+  datasource:
+
+    # Database URL
+    # Format:
+    # jdbc:postgresql://HOST:PORT/DATABASE_NAME
+    #
+    # Example:
+    # jdbc:postgresql://localhost:5432/gadgetsstore
+    #
+    # Here we are using environment variables
+    # for better security and flexibility.
+    url: ${DATABASE_URL}
+
+    # PostgreSQL username
+    username: ${DATABASE_USERNAME}
+
+    # PostgreSQL password
+    password: ${DATABASE_PASSWORD}
+
+    # JDBC Driver for PostgreSQL
+    # Spring uses this driver internally
+    # to communicate with the database.
+    driver-class-name: org.postgresql.Driver
+
+  # ---------------------------------------------------
+  # JPA + Hibernate Configuration
+  # ---------------------------------------------------
+  # JPA = Java Persistence API
+  # Hibernate = ORM framework used by Spring Boot
+  #
+  # ORM means:
+  # Java Object <--> Database Table Mapping
+  jpa:
+
+    hibernate:
+
+      # ddl-auto controls database table behavior
+      #
+      # update:
+      # Automatically creates/updates tables
+      # based on your Entity classes.
+      #
+      # Other values:
+      # create       -> Deletes old tables and recreates
+      # create-drop  -> Deletes tables when app stops
+      # validate     -> Only validates schema
+      # none         -> No automatic action
+      ddl-auto: update
+
+    # Shows SQL queries in console
+    # Very useful for learning and debugging.
+    show-sql: true
+
+    properties:
+      hibernate:
+
+        # Makes SQL queries cleaner and formatted
+        # in terminal logs.
+        format_sql: true
